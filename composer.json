@@ -1,0 +1,23 @@
+{
+    "name": "raoulsson/rcurl",
+    "description": "A class that curls.",
+    "keywords": ["curl"],
+    "homepage": "https://github.com/raoulsson/r-curl",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Raoul Schmidiger",
+            "email": "raoul.schmidiger@gmail.com",
+            "homepage": "http://www.r-it.ch"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0",
+        "ext-curl": "*",
+        "psr/log": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {"raoulsson\\": "src/raoulsson"}
+    }
+}
