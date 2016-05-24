@@ -125,6 +125,7 @@ class RCurl {
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_HEADER, true);
         curl_setopt($ch, CURLOPT_USERAGENT, "rcurl");
+        curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
 
         $fp = null;
         $tmpLog = null;
