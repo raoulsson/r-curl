@@ -19,6 +19,10 @@ class RCurl {
 
 	/** @var LoggerInterface */
 	private $logger;
+	/** @var string */
+	private $userName;
+	/** @var string */
+	private $password;
 
 	/**
 	 * Curl constructor.
@@ -31,6 +35,34 @@ class RCurl {
 		} else {
 			$this->logger = $logger;
 		}
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getUserName() {
+		return $this->userName;
+	}
+
+	/**
+	 * @param string $userName
+	 */
+	public function setUserName($userName) {
+		$this->userName = $userName;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getPassword() {
+		return $this->password;
+	}
+
+	/**
+	 * @param string $password
+	 */
+	public function setPassword($password) {
+		$this->password = $password;
 	}
 
 	/**
@@ -119,9 +151,12 @@ class RCurl {
 			$headerData[] = "Content-Length: " . strlen($postFields);
 		}
 
-
 		if($headerData) {
 			curl_setopt($ch, CURLOPT_HTTPHEADER, $headerData);
+		}
+
+		if($this->userName && $this->password) {
+			curl_setopt($ch, CURLOPT_USERPWD, $this->userName . ":" . $this->password);
 		}
 
 		curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
