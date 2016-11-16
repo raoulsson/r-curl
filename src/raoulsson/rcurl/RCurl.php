@@ -148,6 +148,9 @@ class RCurl {
 			if(!$headerData) {
 				$headerData = [];
 			}
+			if(!$postFields) {
+				$postFields = "";
+			}
 			$headerData[] = "Content-Length: " . strlen($postFields);
 		}
 
@@ -171,7 +174,7 @@ class RCurl {
 		$tmpLog = null;
 		if($debug) {
 			$tmpLog = tempnam(sys_get_temp_dir(), 'crl');
-			$fp = fopen($tmpLog, 'w');
+			$fp = fopen($tmpLog, 'wb');
 			curl_setopt($ch, CURLOPT_VERBOSE, true);
 			curl_setopt($ch, CURLOPT_STDERR, $fp);
 		}
@@ -188,7 +191,7 @@ class RCurl {
 
 		if($debug) {
 			fclose($fp);
-			$fp = fopen($tmpLog, 'r');
+			$fp = fopen($tmpLog, 'rb');
 			if ($fp) {
 				while(($line = fgets($fp)) !== false) {
 					$this->logger->debug("CurlHeader: " . trim(preg_replace('/\s\s+/', ' ', $line)));
