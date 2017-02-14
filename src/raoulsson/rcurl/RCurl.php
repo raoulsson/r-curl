@@ -87,6 +87,19 @@ class RCurl {
 		return $this->doMakeCall("POST", $url, null, $postFields, $headerData, $debug);
 	}
 
+
+
+	/**
+	 * @param $url
+	 * @param array|string $headerData
+	 * @param bool $debug
+	 * @param bool $allowParams
+	 * @return array
+	 */
+	public function makeSimpleCall($url, array $headerData = null, $debug = false, $allowParams = true) {
+		return $this->doMakeCall("GET", $url, null, null, $headerData, $debug, $allowParams);
+	}
+
 	/**
 	 * Back and forth the params but for client code convenience we do it
 	 *
@@ -122,12 +135,12 @@ class RCurl {
 	 * @param bool $debug
 	 * @return array
 	 */
-	private function doMakeCall($method, $url, $getFields = null, $postFields = null, array $headerData = null, $debug = false) {
+	private function doMakeCall($method, $url, $getFields = null, $postFields = null, array $headerData = null, $debug = false, $allowParams = false) {
 		if($debug) {
 			$this->logger->debug("Curl to: " . $url);
 		}
 
-		if(self::contains($url, "?")) {
+		if(!$allowParams || self::contains($url, "?")) {
 			throw new RuntimeException("URL has to be clean of params, no ?");
 		}
 
