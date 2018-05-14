@@ -164,7 +164,7 @@ class RCurl {
 			if(!$postFields) {
 				$postFields = "";
 			}
-			$headerData[] = "Content-Length: " . strlen($postFields);
+            $headerData[] = "Content-Length: " . strlen(json_encode($postFields));
 		}
 
 		if($headerData) {
