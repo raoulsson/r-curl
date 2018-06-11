@@ -157,6 +157,11 @@ class RCurl {
             if(!$query) {
                 $query = "";
             }
+
+            if ($debug) {
+                $this->logger->debug("Payload: " . $query);
+            }
+
             $headerData[] = "Content-Length: " . strlen($query);
         }
 
