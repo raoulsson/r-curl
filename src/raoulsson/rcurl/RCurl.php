@@ -127,8 +127,8 @@ class RCurl {
             $this->logger->debug("Curl to: " . $url);
         }
 
-        if(self::contains($url, "?")) {
-            throw new RuntimeException("URL has to be clean of params, no ?");
+        if (RCurl::startsWith($url, "//")) {
+            $url = "http:" . $url;
         }
 
         $ch = curl_init();
@@ -157,11 +157,6 @@ class RCurl {
             if(!$query) {
                 $query = "";
             }
-
-            if ($debug) {
-                $this->logger->debug("Payload: " . $query);
-            }
-
             $headerData[] = "Content-Length: " . strlen($query);
         }
 
@@ -245,6 +240,10 @@ class RCurl {
      */
     private static function contains($heystack, $needle) {
         return strpos($heystack, $needle) !== false;
+    }
+
+    public static function startsWith($haystack, $needle) {
+        return $needle === "" || strpos($haystack, $needle) === 0;
     }
 
 }
