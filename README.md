@@ -1,6 +1,6 @@
 ## RCurl
 
-A class that helps to curl in PHP.
+A class that helps to curl in PHP...
 
 ## Installation
 
